@@ -2,24 +2,28 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllProducts } from '../redux/actions/productActions';
+
 
 function HomeScreen() {
-
-  let [products, setProducts] = useState([]);
+  let dispatch = useDispatch()
+  let data = useSelector((state) => state.getAllProductsReducer)
+  let { loading, products, error } = data
+  // let [products, setProducts] = useState([]);
   
   useEffect(() => {
-    axios.get('http://localhost:5500/products')
-      .then((res) => {
-        console.log(res.data)
-        setProducts(res.data)
-    })
-      .catch((error) => {
-      console.log(error)
-    })
-  })
+    dispatch(getAllProducts())
+  }, [])
   return (
     <div className='container-fluid mt-3'>
-      <div className='row justify-content-center'>
+      {loading ? (
+        <h2>Loading</h2>
+      ) : error ? (
+        <h2>{error}</h2>
+      ) : (
+        
+           <div className='row justify-content-center'>
         {
           products.map((product) => {
             return (
@@ -40,9 +44,11 @@ function HomeScreen() {
           })
         }
 
-      </div>
+      </div> 
+        
+      )}
     </div>
-  )
+  );
 }
 
 export default HomeScreen
