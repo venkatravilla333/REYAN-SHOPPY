@@ -2,15 +2,16 @@
 
 
 import {applyMiddleware, combineReducers, createStore} from 'redux'
-import { getAllProductsReducer } from './reducers/productReducer'
+import { getAllProductsReducer, getProductByIdReducer } from './reducers/productReducer'
 import { thunk } from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 
 
 
 let rootReducer = combineReducers({
-  getAllProductsReducer: getAllProductsReducer
-})
+  getAllProductsReducer: getAllProductsReducer,
+  getProductByIdReducer: getProductByIdReducer
+});
 
 
 

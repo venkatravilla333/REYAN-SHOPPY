@@ -8,8 +8,8 @@ import { getAllProducts } from '../redux/actions/productActions';
 
 function HomeScreen() {
   let dispatch = useDispatch()
-  let data = useSelector((state) => state.getAllProductsReducer)
-  let { loading, products, error } = data
+  let getAllProductsState = useSelector((state) => state.getAllProductsReducer)
+  let { loading, products, error } = getAllProductsState
   // let [products, setProducts] = useState([]);
   
   useEffect(() => {
@@ -28,7 +28,7 @@ function HomeScreen() {
           products.map((product) => {
             return (
               <div className='col-md-3 card m-3 p-3'>
-                <Link to={`product/${product.id}`}>
+                <Link to={`product/${product._id}`}>
                   <img
                     src={product.image}
                     alt=''

@@ -20,7 +20,7 @@ function App() {
         <Nav />
         <Routes>
           <Route path='/' element={<HomeScreen />} />
-          {/* <Route path='/product/:id' element={<ProductDescription/>} /> */}
+          <Route path='/product/:id' element={<ProductDescription/>} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/cart' element={<Cart />} />

@@ -30,3 +30,32 @@ export let getAllProductsReducer = (state=initialState, action) => {
     
   }
 }
+
+
+export let getProductByIdReducer = (state={product:[]}, action) => {
+  switch (action.type) {
+    case 'GET_PRODUCTBYID_REQUEST':
+      return {
+        loading: true
+      }
+      break;
+    case 'GET_PRODUCTBYID_SUCCESS':
+      return {
+        loading: false,
+        product: action.payload
+      }
+      break;
+    case 'GET_PRODUCTBYID_FAILURE':
+      return {
+        loading: false,
+        error: action.payload
+      }
+      break;
+    default:
+      return state
+    
+  }
+}
+
+
+
