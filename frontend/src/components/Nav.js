@@ -2,8 +2,12 @@ import React from 'react'
 
 import logo from '../images/logo-999.png'
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Nav() {
+  let addToCartState = useSelector((state) => state.addToCartReducer)
+  let { cartItems } = addToCartState
+  
   return (
     <div>
       <nav className='navbar navbar-expand-lg bg-dark navbar-dark'>
@@ -41,7 +45,7 @@ function Nav() {
                 Login
               </Link>
               <Link to='/cart' className='nav-link text-white fw-medium'>
-                <i className='bi bi-cart2 fs-4'></i>
+                <i className='bi bi-cart2 fs-4'></i> {cartItems.length}
               </Link>
             </div>
           </div>
