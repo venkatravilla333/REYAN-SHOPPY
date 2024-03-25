@@ -5,11 +5,11 @@ import { addToCart, deleteFromCart } from '../redux/actions/cartActions';
 function CartScreen() {
 
   let cartState = useSelector((state) => state.cartReducer)
-  let getProductByIdState = useSelector((state) => state.getProductByIdReducer);
+  // let getProductByIdState = useSelector((state) => state.getProductByIdReducer);
   let dispatch = useDispatch()
 
-  let {product} = getProductByIdState;
-  console.log(product);
+  // let {product} = getProductByIdState;
+  // console.log(product);
   
   let { cartItems } = cartState
  
@@ -37,7 +37,7 @@ function CartScreen() {
                     <td>{item.price}</td>
                     <td>
                       <select value={item.quantity} onChange={(e) => { dispatch(addToCart(item, e.target.value)) }}>
-                        {Array.from({ length: product.countInStock }).map(
+                        {Array.from({ length: item.countInStock }).map(
                           (v, i) => {
                             console.log(v);
                             let optionValue = i + 1;
