@@ -1,6 +1,7 @@
 
+import { store } from "../store"
 
-export let addToCart = (product, quantity) => {
+export let addToCart = (product, quantity) =>  {
   // console.log(quantity)
   let cartItem = {
     name: product.name,
@@ -10,7 +11,15 @@ export let addToCart = (product, quantity) => {
     quantity: quantity
     
   }
+  return (dispatch, getState) => {
+    dispatch({ type: 'ADD_TO_CART', payload: cartItem })
+    localStorage.setItem('cartItems', JSON.stringify(getState().cartReducer.cartItems))
+  }
+  
+}
+
+export let deleteFromCart = (item) => {
   return (dispatch) => {
-    dispatch({type: 'ADD_TO_CART', payload: cartItem})
+   return dispatch({ type: 'DELETE_FROM_CART', payload: item })
   }
 }

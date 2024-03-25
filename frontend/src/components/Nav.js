@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 function Nav() {
-  let addToCartState = useSelector((state) => state.addToCartReducer)
-  let { cartItems } = addToCartState
-  
+  let cartState = useSelector((state) => state.cartReducer)
+  let { cartItems } = cartState
+
   return (
     <div>
       <nav className='navbar navbar-expand-lg bg-dark navbar-dark'>

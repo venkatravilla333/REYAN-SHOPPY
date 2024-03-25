@@ -5,11 +5,11 @@ import Nav from './components/Nav';
 import { Route, Routes } from 'react-router-dom';
 import ProductDescription from './screens/ProductDescription';
 import Login from './components/Login';
-import Cart from './components/Cart';
 import Signup from './components/Signup';
 import { useState } from 'react';
 import { store } from './redux/store';
 import { Provider } from 'react-redux';
+import CartScreen from './screens/CartScreen';
 
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
           <Route path='/product/:id' element={<ProductDescription/>} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
-          <Route path='/cart' element={<Cart />} />
+          <Route path='/cart' element={<CartScreen />} />
         </Routes>
       </div>
     </Provider>
