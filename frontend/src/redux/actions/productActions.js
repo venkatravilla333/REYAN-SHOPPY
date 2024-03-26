@@ -6,7 +6,7 @@ export let getAllProducts = () => {
   return (dispatch) => {
     dispatch({ type: 'GET_PRODUCTS_REQUEST' })
     axios
-      .get('http://localhost:5500/getallproducts')
+      .get('http://localhost:5000/getallproducts')
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'GET_PRODUCTS_SUCCESS', payload: res.data});

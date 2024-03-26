@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function Login() {
+function LoginScreen() {
   var [email, setEmail] = useState('');
   var [password, setPassword] = useState('');
 
@@ -82,4 +82,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginScreen;

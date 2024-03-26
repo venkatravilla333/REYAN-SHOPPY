@@ -2,29 +2,40 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function Signup() {
+import {useDispatch} from 'react-redux'
+import { signUpUser } from '../redux/actions/userActions';
+
+function SignupScreen() {
   var [username, setUsername] = useState('');
   var [email, setEmail] = useState('');
   var [password, setPassword] = useState('');
   var [confirmpassword, setConfirmpassword] = useState('');
 
+   let dispatch = useDispatch()
   var navigate = useNavigate();
 
   var submitHandler = (e) => {
     e.preventDefault();
-    var data = {
+    var userdata = {
       username,
       email,
       password,
       confirmpassword,
     };
-    axios
-      .post('http://localhost:5000/signup', data)
-      .then((res) => {
-        console.log(res);
-        navigate('/login');
-      })
-      .catch(() => {});
+
+    if (password == confirmpassword) {
+      dispatch(signUpUser(userdata))
+    } else {
+      alert('Passwords not matched')
+    }
+
+  //   axios
+  //     .post('http://localhost:5000/signup', data)
+  //     .then((res) => {
+  //       console.log(res);
+  //       navigate('/login');
+  //     })
+  //     .catch(() => {});
   };
 
   return (
@@ -43,6 +54,7 @@ function Signup() {
                 id='username'
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                required
               />
             </div>
             <div className='mb-3'>
@@ -55,6 +67,7 @@ function Signup() {
                 id='email'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
             <div className='mb-3'>
@@ -67,6 +80,7 @@ function Signup() {
                 id='password'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
             <div className='mb-3'>
@@ -79,6 +93,7 @@ function Signup() {
                 id='cpassword'
                 value={confirmpassword}
                 onChange={(e) => setConfirmpassword(e.target.value)}
+                required
               />
             </div>
             <button
@@ -100,4 +115,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default SignupScreen;

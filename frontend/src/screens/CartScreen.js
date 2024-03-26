@@ -5,13 +5,14 @@ import { addToCart, deleteFromCart } from '../redux/actions/cartActions';
 function CartScreen() {
 
   let cartState = useSelector((state) => state.cartReducer)
-  // let getProductByIdState = useSelector((state) => state.getProductByIdReducer);
+
   let dispatch = useDispatch()
 
-  // let {product} = getProductByIdState;
-  // console.log(product);
-  
   let { cartItems } = cartState
+
+  let total = cartItems.reduce((cum, item) => {
+    return cum + (item.price*item.quantity)
+  }, 0)
  
   
   return (
@@ -60,6 +61,7 @@ function CartScreen() {
             }
           </tbody>
         </table>
+        <h2 className='mt-4 fs-4'>Total :{total} </h2>
       </div>
     </div>
   );

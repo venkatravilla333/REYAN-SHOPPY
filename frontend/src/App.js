@@ -4,12 +4,13 @@ import HomeScreen from './screens/HomeScreen';
 import Nav from './components/Nav';
 import { Route, Routes } from 'react-router-dom';
 import ProductDescription from './screens/ProductDescription';
-import Login from './components/Login';
-import Signup from './components/Signup';
+
 import { useState } from 'react';
 import { store } from './redux/store';
 import { Provider } from 'react-redux';
 import CartScreen from './screens/CartScreen';
+import LoginScreen from './screens/LoginScreen';
+import SignupScreen from './screens/SignupScreen';
 
 
 function App() {
@@ -21,8 +22,8 @@ function App() {
         <Routes>
           <Route path='/' element={<HomeScreen />} />
           <Route path='/product/:id' element={<ProductDescription/>} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
+          <Route path='/login' element={<LoginScreen />} />
+          <Route path='/signup' element={<SignupScreen />} />
           <Route path='/cart' element={<CartScreen />} />
         </Routes>
       </div>
