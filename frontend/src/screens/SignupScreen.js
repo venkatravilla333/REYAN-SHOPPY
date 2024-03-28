@@ -12,8 +12,8 @@ function SignupScreen() {
   var [confirmpassword, setConfirmpassword] = useState('');
 
    let dispatch = useDispatch()
-  var navigate = useNavigate();
-
+  let navigate = useNavigate()
+  
   var submitHandler = (e) => {
     e.preventDefault();
     var userdata = {
@@ -25,6 +25,8 @@ function SignupScreen() {
 
     if (password == confirmpassword) {
       dispatch(signUpUser(userdata))
+      navigate('/login')
+      
     } else {
       alert('Passwords not matched')
     }

@@ -22,3 +22,5 @@ let userSchema = mongoose.Schema({
 }, { timestamps: true })
 
 export let User = mongoose.model('User', userSchema)
+
+

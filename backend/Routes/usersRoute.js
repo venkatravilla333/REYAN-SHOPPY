@@ -1,5 +1,6 @@
 import { User } from "../Models/userModel.js";
 import express from 'express'
+import jwt from 'jsonwebtoken'
 
 let router = express.Router()
 
@@ -31,6 +32,38 @@ router.post('/signup', async (req, res) => {
     
   } catch (error) {
     return res.status(500).send('Internal Server Error');
+  }
+});
+
+router.post('/login', async (req, res) => {
+  console.log(req.body)
+  try {
+    let { email, password } = req.body;
+    console.log(req.body);
+
+    if (!email || !password) {
+      return res.status(400).send('Required email and password');
+    }
+
+    let existUser = await User.findOne({ email });
+    console.log(existUser);
+
+    if (!existUser) {
+      return res.status(404).send('User not found');
+    }
+    if (existUser.password !== password) {
+      return res.status(400).send('Invalid credentails');
+    }
+
+    if (existUser.email && existUser.password) {
+      let token = jwt.sign({ id: existUser._id }, 'secret', {
+        expiresIn: '1d',
+      });
+      console.log('login:', token);
+      return res.json({ token, userID: existUser._id });
+    }
+  } catch (error) {
+    res.status(500).send('Internal server error');
   }
 });
 

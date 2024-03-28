@@ -22,7 +22,7 @@ export let getProductById = (productid) => {
   return (dispatch) => {
     dispatch({ type: 'GET_PRODUCTBYID_REQUEST' })
     axios
-      .post('http://localhost:5500/getproductbyid', {productid})
+      .post('http://localhost:5000/getproductbyid', {productid})
       .then((res) => {
         console.log(res.data);
         dispatch({ type: 'GET_PRODUCTBYID_SUCCESS', payload: res.data});

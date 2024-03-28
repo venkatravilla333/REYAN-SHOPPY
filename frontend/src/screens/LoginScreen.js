@@ -12,25 +12,25 @@ function LoginScreen() {
 
   var submitHandler = (e) => {
     e.preventDefault();
-    var data = {
+    let userdata = {
       email,
       password,
     };
     axios
-      .post('http://localhost:5000/login', data)
+      .post('http://localhost:5000/login', userdata)
       .then((res) => {
-        // console.log(res.data.token)
-        localStorage.setItem('jwt-token', res.data.token);
-        setToken(localStorage.getItem('jwt-token'));
+        console.log(res.data.token)
+        // localStorage.setItem('jwt-token', res.data.token);
+        // setToken(localStorage.getItem('jwt-token'));
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  if (token) {
-    return navigate('/profile');
-  }
+  // if (token) {
+  //   return navigate('/profile');
+  // }
 
   return (
     <div className='container mt-4'>
@@ -48,6 +48,7 @@ function LoginScreen() {
                 id='email'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
             <div className='mb-3'>
@@ -60,6 +61,7 @@ function LoginScreen() {
                 id='password'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
 
