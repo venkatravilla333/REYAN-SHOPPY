@@ -10,6 +10,8 @@ import { loginUserReducer, signUpUserReducer } from './reducers/userReducer';
 
 
 let cartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
+let userdata = localStorage.getItem('userdata') ? JSON.parse(localStorage.getItem('userdata')) : []
+
 console.log(cartItems)
 
 let rootReducer = combineReducers({
@@ -21,7 +23,8 @@ let rootReducer = combineReducers({
 });
 
 let initialState = {
-  cartReducer : {cartItems: cartItems}
+  cartReducer: { cartItems: cartItems },
+  loginUserReducer: {userdata: userdata}
 }
 
 export let store = createStore(

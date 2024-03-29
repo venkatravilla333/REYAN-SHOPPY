@@ -41,6 +41,7 @@ export let loginUserReducer = (state = {}, action) => {
         ...state,
         loading: false,
         success: true,
+        userdata: action.payload
         
       }
       break;

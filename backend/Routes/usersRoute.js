@@ -60,7 +60,7 @@ router.post('/login', async (req, res) => {
         expiresIn: '1d',
       });
       console.log('login:', token);
-      return res.json({ token, userID: existUser._id });
+      return res.json({ token: token, username: existUser.username});
     }
   } catch (error) {
     res.status(500).send('Internal server error');

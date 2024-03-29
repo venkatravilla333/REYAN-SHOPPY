@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { loginUser } from '../redux/actions/userActions';
+import { useDispatch } from 'react-redux';
 
 function LoginScreen() {
   var [email, setEmail] = useState('');
   var [password, setPassword] = useState('');
 
-  var [token, setToken] = useState(null);
+  // var [token, setToken] = useState(null);
 
   var navigate = useNavigate();
+ let dispatch = useDispatch()
 
   var submitHandler = (e) => {
     e.preventDefault();
@@ -16,17 +19,20 @@ function LoginScreen() {
       email,
       password,
     };
-    axios
-      .post('http://localhost:5000/login', userdata)
-      .then((res) => {
-        console.log(res.data.token)
+    dispatch(loginUser(userdata))
+    navigate('/')
+  }
+  //   axios
+  //     .post('http://localhost:5000/login', userdata)
+  //     .then((res) => {
+  //       console.log(res.data.token)
         // localStorage.setItem('jwt-token', res.data.token);
         // setToken(localStorage.getItem('jwt-token'));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   // if (token) {
   //   return navigate('/profile');

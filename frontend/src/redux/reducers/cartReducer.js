@@ -1,5 +1,4 @@
 
-import { store } from "../store"
 
 export let cartReducer = (state = { cartItems: [] }, action,) => {
   // console.log(action.payload)

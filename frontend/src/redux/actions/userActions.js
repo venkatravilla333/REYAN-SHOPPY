@@ -21,13 +21,19 @@ export let signUpUser = (userdata) => {
 }
 export let loginUser = (userdata) => {
 
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({ type: 'USER_LOGIN_REQUEST' })
     axios
       .post('http://localhost:5000/login', userdata)
       .then((res) => {
         console.log(res.data)
-        dispatch({ type: 'USER_LOGIN_SUCCESS' })
+        dispatch({ type: 'USER_LOGIN_SUCCESS', payload: res.data });
+        localStorage.setItem(
+          'userdata',
+          JSON.stringify(getState().loginUserReducer.userdata)
+        );
+       
+       
     })
       .catch((err) => {
         console.log(err)
