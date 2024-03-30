@@ -2,15 +2,20 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { signUpUser } from '../redux/actions/userActions';
+import Spinner from '../components/Spinner';
+import Success from '../components/Success';
+import Error from '../components/Error';
 
 function SignupScreen() {
   var [username, setUsername] = useState('');
   var [email, setEmail] = useState('');
   var [password, setPassword] = useState('');
   var [confirmpassword, setConfirmpassword] = useState('');
-
+  let signupuserstate = useSelector((state) => state.signUpUserReducer)
+  let { loading, success, error } = signupuserstate
+  console.log(signupuserstate)
    let dispatch = useDispatch()
   let navigate = useNavigate()
   
@@ -25,7 +30,10 @@ function SignupScreen() {
 
     if (password == confirmpassword) {
       dispatch(signUpUser(userdata))
-      navigate('/login')
+
+      if (success) {
+        navigate('/login')
+      }
       
     } else {
       alert('Passwords not matched')
@@ -44,6 +52,9 @@ function SignupScreen() {
     <div className='container mt-4'>
       <div className='row'>
         <h2 className='text-center fs-4'>Signup</h2>
+        {loading && <Spinner />}
+        {success && <Success success='User created successfully' />}
+        {error && <Error error='Something went wrong'/>}
         <div className='col-4 m-auto my-4 bg-secondary px-4 py-3 text-white fs-5 rounded'>
           <form onSubmit={submitHandler}>
             <div className='mb-3'>

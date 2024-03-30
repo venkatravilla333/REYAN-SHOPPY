@@ -2,11 +2,18 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { loginUser } from '../redux/actions/userActions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Error from '../components/Error';
+import Spinner from '../components/Spinner';
 
 function LoginScreen() {
   var [email, setEmail] = useState('');
   var [password, setPassword] = useState('');
+  let loginuserstate = useSelector((state) => state.loginUserReducer);
+  console.log(loginuserstate)
+
+  let { error, success, loading } = loginuserstate
+  // console.log(loginuserstate)
 
   // var [token, setToken] = useState(null);
 
@@ -20,7 +27,9 @@ function LoginScreen() {
       password,
     };
     dispatch(loginUser(userdata))
-    navigate('/')
+    if (success) {
+      navigate('/') 
+    }
   }
   //   axios
   //     .post('http://localhost:5000/login', userdata)
@@ -42,6 +51,8 @@ function LoginScreen() {
     <div className='container mt-4'>
       <div className='row'>
         <h2 className='text-center fs-4'>Login</h2>
+        {loading && <Spinner/>}
+        {error && <Error error='Credentials not matched'/>}
         <div className='col-4 m-auto my-4 bg-secondary px-4 py-3 text-white fs-5 rounded'>
           <form onSubmit={submitHandler}>
             <div className='mb-3'>

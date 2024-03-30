@@ -52,6 +52,11 @@ export let loginUserReducer = (state = {}, action) => {
         error: action.payload
       }
       break;
+    case 'USER_LOGOUT':
+      return {
+        ...state
+      }
+    
     default:
       return state
     

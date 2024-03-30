@@ -2,7 +2,8 @@ import React from 'react'
 
 import logo from '../images/logo-999.png'
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogout } from '../redux/actions/userActions';
 
 function Nav() {
   let cartState = useSelector((state) => state.cartReducer)
@@ -11,8 +12,9 @@ function Nav() {
   console.log(state)
 
   let { userdata } = userState
-  let {username} = userdata
-  
+  let { username } = userdata
+ 
+  let dispatch = useDispatch()
   
   let { cartItems } = cartState
   // console.log(userState)
@@ -70,11 +72,11 @@ function Nav() {
                         Orders
                       </a>
                     </li>
-                    <li>
-                      <a className='dropdown-item' href='#'>
+                    
+                      <button className='dropdown-item' onClick={()=>{dispatch(userLogout())}}>
                         Logout
-                      </a>
-                    </li>
+                      </button>
+                    
                   </ul>
                 </div>
               ) : (

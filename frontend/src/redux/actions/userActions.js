@@ -42,3 +42,14 @@ export let loginUser = (userdata) => {
     
   }
 }
+
+
+export let userLogout = () => {
+  return (dispatch) => {
+    dispatch({type: 'USER_LOGOUT'})
+    localStorage.removeItem('userdata')
+    localStorage.removeItem('cartItems')
+    window.location.href = '/login'
+  }
+}
+
