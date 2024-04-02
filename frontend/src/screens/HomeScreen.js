@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllProducts } from '../redux/actions/productActions';
 import Spinner from '../components/Spinner';
 import Error from '../components/Error';
+import Filter from '../components/Filter';
 
 
 function HomeScreen() {
@@ -19,6 +20,7 @@ function HomeScreen() {
   }, [])
   return (
     <div className='container-fluid mt-3'>
+      <Filter/>
       {loading ? (
        <Spinner/>
       ) : error ? (
@@ -29,7 +31,7 @@ function HomeScreen() {
         {
           products.map((product) => {
             return (
-              <div className='col-md-3 card m-3 p-3'>
+              <div className='card m-3 p-3'>
                 <Link to={`product/${product._id}`}>
                   <div className='text-center'>
                     <img

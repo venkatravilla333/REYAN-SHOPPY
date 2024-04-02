@@ -30,11 +30,11 @@ function SignupScreen() {
 
     if (password == confirmpassword) {
       dispatch(signUpUser(userdata))
-
+      
       if (success) {
         navigate('/login')
       }
-      
+
     } else {
       alert('Passwords not matched')
     }
@@ -52,9 +52,9 @@ function SignupScreen() {
     <div className='container mt-4'>
       <div className='row'>
         <h2 className='text-center fs-4'>Signup</h2>
-        {loading && <Spinner />}
-        {success && <Success success='User created successfully' />}
-        {error && <Error error='Something went wrong'/>}
+        {loading && (<Spinner />)}
+        {error && (<Error error='User already exist'/>)}
+        {success && (<Success success='User is created successfully' />)}
         <div className='col-4 m-auto my-4 bg-secondary px-4 py-3 text-white fs-5 rounded'>
           <form onSubmit={submitHandler}>
             <div className='mb-3'>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, deleteFromCart } from '../redux/actions/cartActions';
+import Checkout from '../components/Checkout';
 
 function CartScreen() {
 
@@ -61,7 +62,10 @@ function CartScreen() {
             }
           </tbody>
         </table>
+        <hr />
         <h2 className='mt-4 fs-4'>Total :{total} </h2>
+        <hr />
+        <Checkout amount={total} />
       </div>
     </div>
   );

@@ -7,12 +7,12 @@ import Error from '../components/Error';
 import Spinner from '../components/Spinner';
 
 function LoginScreen() {
+  let loginUserState = useSelector((state) => state.loginUserReducer);
+  // let { error,loading, success } = loginUserState
+
   var [email, setEmail] = useState('');
   var [password, setPassword] = useState('');
-  let loginuserstate = useSelector((state) => state.loginUserReducer);
-  console.log(loginuserstate)
 
-  let { error, success, loading } = loginuserstate
   // console.log(loginuserstate)
 
   // var [token, setToken] = useState(null);
@@ -20,17 +20,19 @@ function LoginScreen() {
   var navigate = useNavigate();
  let dispatch = useDispatch()
 
-  var submitHandler = (e) => {
+  var submitHandler =  (e) => {
     e.preventDefault();
     let userdata = {
       email,
       password,
     };
     dispatch(loginUser(userdata))
-    if (success) {
-      navigate('/') 
-    }
+     if (loginUserState.success) {
+       navigate('/');
+     }
   }
+
+ 
   //   axios
   //     .post('http://localhost:5000/login', userdata)
   //     .then((res) => {
@@ -51,8 +53,8 @@ function LoginScreen() {
     <div className='container mt-4'>
       <div className='row'>
         <h2 className='text-center fs-4'>Login</h2>
-        {loading && <Spinner/>}
-        {error && <Error error='Credentials not matched'/>}
+        {loginUserState.loading && (<Spinner/>)}
+        {loginUserState.error && (<Error error='Credentials not matched'/>)}
         <div className='col-4 m-auto my-4 bg-secondary px-4 py-3 text-white fs-5 rounded'>
           <form onSubmit={submitHandler}>
             <div className='mb-3'>
