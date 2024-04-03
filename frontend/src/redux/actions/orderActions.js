@@ -1,5 +1,5 @@
 
-
+import axios from 'axios'
 
 export let placeOrder = (token, amount) => {
   return (dispatch, getState) => {
@@ -8,7 +8,8 @@ export let placeOrder = (token, amount) => {
     dispatch({ type: 'PLACE_ORDER_REQUEST' })   
 
     axios.post('http://localhost:5000/placeorder', {token, amount, currentUser, cartItems})
-      .then(() => {
+      .then((res) => {
+        console.log(res)
        dispatch({ type: 'PLACE_ORDER_SUCCESS' });
       
     })

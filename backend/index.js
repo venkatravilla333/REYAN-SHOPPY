@@ -6,6 +6,7 @@ import { PORT, dbURL } from './config.js'
 import mongoose from 'mongoose'
 import productsRoute from './Routes/productsRoute.js'
 import usersRoute from './Routes/usersRoute.js'
+import ordersRoute from './Routes/ordersRoute.js'
 import cors from 'cors'
 
 let app = express()
@@ -19,6 +20,7 @@ app.get('/', (req, res) => {
 
 app.use('/', productsRoute)
 app.use('/', usersRoute)
+app.use('/', ordersRoute)
 
 
 mongoose.connect(dbURL)

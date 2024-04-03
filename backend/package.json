@@ -17,6 +17,8 @@
     "express-router": "^0.0.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.2",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "stripe": "^14.23.0",
+    "uuid": "^9.0.1"
   }
 }
