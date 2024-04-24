@@ -1,38 +1,34 @@
 
-import stripe from 'stripe'
 
-
+import Razorpay from 'razorpay'
 import express from 'express'
 
 let router = express.Router()
 
-import { v4 as uuidv4 } from 'uuid';
-
-let Stripe = stripe('sk_test_51P13sVSGGMHgvHeaZuRNeLp6GO5fmVHrRXJubcyUTLzwPt2h8Xf7sLJdYZuOuYunlsy08njSZfTa9fOcI1vRHWmT00FuqchVwd')
+import { key_id, key_secret } from '../config.js';
 
 router.post('/placeorder', async (req, res) => {
-  console.log(req.body)
-  let {token , amount, currentUser, cartItems} = req.body
+  
+  try {
+    var razorpay = new Razorpay({
+      key_id: key_id,
+      key_secret: key_secret,
+    });
 
-  let customer = await Stripe.customers.create({
-    email: token.email,
-    source: token.id
-  })
-  let payment = await Stripe.charges.create({
-    amount: amount * 100,
-    currency: 'INR',
-    customer: customer.id,
-    receipt_email: token.email
+    let values = req.body;
 
-  }, {
-    idempotencyKey: uuidv4()
-  })
-  if (payment) {
-    res.send('payment successfull')
-    
-  } else {
-    res.send('payment failed')
+    let order = await razorpay.orders.create(values);
+
+    if (!order) {
+      return res.status(500).send('Server Error')
+    }
+    return res.json(order)
+
+  } catch (error) {
+      console.log(error)
+      return res.status(500).send('Server Error');
   }
+  
 })
 
 export default router
