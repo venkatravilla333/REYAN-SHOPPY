@@ -1,8 +1,8 @@
 
-
 import Razorpay from 'razorpay'
 import express from 'express'
 import crypto from 'crypto'
+import OrderModel from '../Models/orderModel.js'
 
 let router = express.Router()
 
@@ -25,12 +25,26 @@ router.post('/placeorder', async (req, res) => {
     console.log(options)
       
 
-    let order = await razorpay.orders.create(options);
+    let Order = await razorpay.orders.create(options);
+    console.log(Order)
 
-    if (!order) {
+    if (Order) {
+      var newOrder = {
+        username: req.body.currentUserName,
+        email: req.body.currentUserEmail,
+        orderItems: req.body.cartItems,
+        orderAmount: req.body.amount,
+      }
+      var dbOrder = OrderModel.create(newOrder)
+      if (dbOrder) {
+        res.send('order created in db')
+      }
+        
+      
+
+    } else {
       return res.status(500).send('Server Error')
     }
-    return res.json(order)
 
   } catch (error) {
       console.log(error)

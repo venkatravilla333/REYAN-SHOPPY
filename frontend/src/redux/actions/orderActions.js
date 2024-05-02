@@ -2,13 +2,27 @@
 import axios from 'axios'
 
 export let placeOrder = (amount, currency) => {
-  console.log(amount)
   return (dispatch, getState) => {
-    let currentUser = getState().loginUserReducer.username
-    let cartItems = getState().cartReducer.cartItems;
+    let currentUserEmail = getState().loginUserReducer.userdata.email
+    let currentUserName = getState().loginUserReducer.userdata.username
+    console.log(currentUserName)
+    console.log(currentUserEmail)
+    let demoItems = getState().cartReducer.cartItems;
+
+    var cartItems = new Array()
+
+    for (var i = 0; i < demoItems.length; i++){
+      var item = {
+        name: demoItems[i].name,
+        quantity: demoItems[i].quantity,
+        price: demoItems[i].price,
+        _id: demoItems[i]._id
+      }
+      cartItems.push(item)
+    }
     dispatch({ type: 'PLACE_ORDER_REQUEST' })   
 
-    axios.post('http://localhost:5000/placeorder', {amount, currency, currentUser, cartItems})
+    axios.post('http://localhost:5000/placeorder', {amount, currency, currentUserEmail,currentUserName, cartItems})
       .then((res) => {
         console.log(res)
        dispatch({ type: 'PLACE_ORDER_SUCCESS', payload: res.data });

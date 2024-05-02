@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { placeOrder, validatePayment } from '../redux/actions/orderActions';
 
-
 const Checkout = ({amount}) => {
   const dispatch = useDispatch();
   const orderdata = useSelector((state) => state.placeOrderReducer);
+  const user = useSelector((state) => state.loginUserReducer);
+  console.log(user)
 
   console.log(orderdata)
 
@@ -26,20 +27,21 @@ const Checkout = ({amount}) => {
 
     const options = {
       key: 'rzp_test_06q1mJXO4n4bXr',
-      amount: order.amount, // Example amount in paise (1000 paise = ₹10)
+      amount: amount*100,
       currency: 'INR',
-      name: 'Your Company Name',
-      description: 'Test Transaction',
-      image: 'https://example.com/your_logo.png',
+      name: 'Reyan Soft',
+      description: 'This is test transaction',
+      image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs7qsbwN8LHKzsXeU-uUb8Ve5VLhMlfGM8Yg&s',
       order_id: order.id,
       handler: async function (response) {
         console.log(response);
-       dispatch(validatePayment(response))
+        dispatch(validatePayment(response));
       },
       prefill: {
-        name: 'Reyan Soft',
+        name: 'Venkat',
         email: 'venkat@gmail.com',
-        contact: '9999999999',
+        contact: '8885659590',
       },
       notes: {
         address: 'Razorpay Corporate Office',

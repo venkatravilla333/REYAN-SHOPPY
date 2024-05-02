@@ -36,7 +36,7 @@ router.post('/signup', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   try {
     let { email, password } = req.body;
     console.log(req.body);
@@ -46,7 +46,7 @@ router.post('/login', async (req, res) => {
     }
 
     let existUser = await User.findOne({ email });
-    console.log(existUser);
+    // console.log(existUser);
 
     if (!existUser) {
       return res.status(404).send('User not found');
@@ -60,7 +60,7 @@ router.post('/login', async (req, res) => {
         expiresIn: '1d',
       });
       console.log('login:', token);
-      return res.json({ token: token, username: existUser.username});
+      return res.json({ token: token, username: existUser.username, email: existUser.email});
     }
   } catch (error) {
     res.status(500).send('Internal server error');
